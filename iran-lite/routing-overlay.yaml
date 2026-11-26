@@ -1,0 +1,20 @@
+# Iran Lite routing for a Sanaei subscription with the PROXY group.
+rule-providers:
+  aghajani-iran-lite-domains:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/iran-domains.mrs
+    path: ./ruleset/aghajani-iran-lite-domains.mrs
+    interval: 86400
+  aghajani-iran-lite-ips:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/iran-ips.mrs
+    path: ./ruleset/aghajani-iran-lite-ips.mrs
+    interval: 86400
+rules:
+  - RULE-SET,aghajani-iran-lite-domains,DIRECT
+  - RULE-SET,aghajani-iran-lite-ips,DIRECT
+  - MATCH,PROXY

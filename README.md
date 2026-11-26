@@ -5,6 +5,12 @@
   <br>
 </h1>
 
+## Iran Lite برای آیفون
+
+**[نصب Clash Mi رسمی از App Store](https://apps.apple.com/us/app/clash-mi/id6744321968)** · **[فایل قوانین ایران برای پنل سنایی](iran-lite/routing-overlay.yaml)**
+
+قواعد Iran Lite از همان فهرست ویندوز و اندروید استخراج شده‌اند. راهنمای فعال‌کردن آن‌ها با اشتراک Mihomo در [این صفحه](iran-lite/README.md) است. لینک نصب بالا نسخهٔ رسمی Clash Mi را باز می‌کند.
+
 <h3 align="center">
 基于 <a href="https://github.com/flutter/flutter">flutter</a> 的 <a href="https://github.com/MetaCubeX/mihomo">mihomo(clash.meta)</a> 图形用户界面。
 </h3>
