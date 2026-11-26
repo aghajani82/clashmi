@@ -10,6 +10,37 @@ import subprocess
 import tempfile
 
 
+def varint(value):
+    result = bytearray()
+    while value >= 128:
+        result.append((value & 127) | 128)
+        value >>= 7
+    result.append(value)
+    return bytes(result)
+
+
+def message(field, value):
+    return varint((field << 3) | 2) + varint(len(value)) + value
+
+
+def write_xray_assets(output, domains, cidrs, rules):
+    # GeoSiteList and GeoIPList each contain one IR category.
+    category = message(1, b"IR")
+    sites = b"".join(
+        message(2, b"\x08\x02" + message(2, entry[7:].encode("ascii")))
+        for entry in domains
+    )
+    networks = b"".join(
+        message(2, message(1, network.network_address.packed) + b"\x10" + varint(network.prefixlen))
+        for network in map(ipaddress.ip_network, cidrs)
+    )
+    (output / "iran-lite-domains.dat").write_bytes(message(1, category + sites))
+    (output / "iran-lite-ips.dat").write_bytes(message(1, category + networks))
+    rules[0]["domain"] = ["ext:iran-lite-domains.dat:ir"]
+    rules[1]["ip"] = ["ext:iran-lite-ips.dat:ir"]
+    (output / "xray-routing.json").write_text(json.dumps(rules, indent=2) + "\n", encoding="utf-8")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("preset", type=Path)
@@ -37,6 +68,7 @@ def main():
                 check=True,
             )
             print(f"{name}: {len(entries)} source matchers")
+    write_xray_assets(output, domains, cidrs, rules)
 
 
 if __name__ == "__main__":
