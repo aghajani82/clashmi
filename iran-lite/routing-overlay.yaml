@@ -14,7 +14,51 @@ rule-providers:
     url: https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/iran-ips.mrs
     path: ./ruleset/aghajani-iran-lite-ips.mrs
     interval: 86400
+  iran-hosted-domains:
+    type: http
+    behavior: domain
+    format: yaml
+    url: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.yaml
+    path: ./ruleset/iran-hosted-domains.yaml
+    interval: 86400
+  iran-category:
+    type: http
+    behavior: domain
+    format: yaml
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ir.yaml
+    path: ./ruleset/iran-category.yaml
+    interval: 86400
 rules:
+  - DOMAIN-SUFFIX,chatgpt.com,PROXY
+  - DOMAIN-SUFFIX,openai.com,PROXY
+  - DOMAIN-SUFFIX,oaistatic.com,PROXY
+  - DOMAIN-SUFFIX,oaiusercontent.com,PROXY
+  - DOMAIN-SUFFIX,oaistatsig.com,PROXY
+  - DOMAIN-SUFFIX,openaimerge.com,PROXY
+  - DOMAIN-SUFFIX,chatgpt-team.site,PROXY
+  - DOMAIN,challenges.cloudflare.com,PROXY
+  - DOMAIN,cdn.workos.com,PROXY
+  - DOMAIN,forwarder.workos.com,PROXY
+  - DOMAIN,frontend-apps-multi-region.workos.com,PROXY
+  - DOMAIN,images.workoscdn.com,PROXY
+  - DOMAIN,setup.workos.com,PROXY
+  - DOMAIN,workos.imgix.net,PROXY
+  - DOMAIN-SUFFIX,eitaa.com,DIRECT
+  - DOMAIN-SUFFIX,eitaa.ir,DIRECT
+  - DOMAIN-SUFFIX,splus.ir,DIRECT
+  - DOMAIN-SUFFIX,bale.ai,DIRECT
+  - DOMAIN-SUFFIX,rubika.ir,DIRECT
+  - DOMAIN-SUFFIX,gap.im,DIRECT
+  - DOMAIN-SUFFIX,gaplication.com,DIRECT
+  - DOMAIN-SUFFIX,zarinpal.com,DIRECT
+  - DOMAIN-SUFFIX,behpardakht.com,DIRECT
+  - DOMAIN-SUFFIX,mydigipay.com,DIRECT
+  - DOMAIN-SUFFIX,vandar.app,DIRECT
+  - DOMAIN-SUFFIX,vandar.io,DIRECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - DOMAIN-SUFFIX,xn--mgba3a4f16a,DIRECT
+  - RULE-SET,iran-category,DIRECT
+  - RULE-SET,iran-hosted-domains,DIRECT
   - RULE-SET,aghajani-iran-lite-domains,DIRECT
   - RULE-SET,aghajani-iran-lite-ips,DIRECT
   - MATCH,PROXY
