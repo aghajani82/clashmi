@@ -19,14 +19,47 @@ subscription in Clash Mi. Use Rule mode. If you already maintain other routing
 rules, merge the two provider entries and direct rules into your existing
 YAML and retain its proxy group and catch-all. The example does not contain
 any server or subscription credential.
+Keep the same subscription and overlay URLs. Clash Mi's Mihomo core refreshes
+the providers every 86,400 seconds while running. Use the provider update
+control, if available, to fetch the new provider files immediately.
 
-The two binary providers preserve all 57,569 domain suffix matchers and
+The two binary providers preserve all 57,572 domain suffix matchers and
 2,825 IPv4/IPv6 CIDRs from the [shared Windows preset](https://github.com/aghajani82/v2rayN/blob/master/v2rayN/ServiceLib/Sample/custom_routing_iran_lite.gz).
 The compact MRS format is supported by Mihomo. To reproduce the providers:
 
 ```sh
 python3 iran-lite/convert.py /path/to/custom_routing_iran_lite.gz /path/to/mihomo
 ```
+
+## به‌روزرسانی قوانین در v2rayN و v2rayNG
+
+با هستهٔ Xray می‌توان قوانین Iran Lite را از فایل‌های دادهٔ جداگانه خواند. این روش
+یک بار تنظیم می‌شود و برای به‌روزرسانی‌های بعدی نیازی به نصب دوباره، حذف برنامه
+یا واردکردن دوبارهٔ لینک ساب ندارد.
+
+| نام فایل | آدرس ثابت |
+| --- | --- |
+| `iran-lite-domains.dat` | [دانلود دامنه‌ها](https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/iran-lite-domains.dat) |
+| `iran-lite-ips.dat` | [دانلود محدوده‌های IP](https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/iran-lite-ips.dat) |
+| `xray-routing.json` | [پروفایل Iran Lite](https://raw.githubusercontent.com/aghajani82/clashmi/main/iran-lite/xray-routing.json) |
+
+- **ویندوز (v2rayN)** — دو فایل DAT را در پوشهٔ `bin` برنامه بگذار.
+  در تنظیمات Routing، مجموعهٔ `Aghajani Edition - Iran Lite` را باز کن. آدرس JSON را در
+  **URL (optional)** بگذار و **Import Rules From Subscription URL** را بزن.
+  برای جایگزینی قوانین موجود، در پرسش افزودن به انتهای فهرست **No** را بزن.
+  ذخیره کن و مطمئن شو مجموعهٔ Iran Lite فعال و **Domain strategy** روی
+  `IPOnDemand` است. برای به‌روزرسانی‌های بعدی فقط دو فایل DAT را جایگزین
+  و اتصال را یک بار قطع و وصل کن.
+- **اندروید (v2rayNG)** — در **Geo files** یا **Assets**، دو منبع با نام
+  دقیق فایل‌های DAT و آدرس‌های جدول اضافه کن و دکمهٔ دانلود را بزن.
+  بعد از دانلود موفق، آدرس فایل JSON را کپی کن و در **Routing Settings → Import
+  Rulesets from Clipboard** وارد کن. **Domain strategy** را روی `IPOnDemand`
+  بگذار. برای به‌روزرسانی‌های بعدی فقط دکمهٔ دانلود Geo files را بزن و اتصال
+  را یک بار قطع و وصل کن.
+
+JSON قوانین فعلی روتینگ را جایگزین می‌کند. اگر قانون شخصی داری، پیش از
+واردکردن JSON از قواعد خودت خروجی بگیر. نسخهٔ Preview 3 یا جدیدتر استثناهای
+ChatGPT را هنگام استفاده از Iran Lite اعمال می‌کند.
 
 The source lists are [Chocolate4U/Iran-v2ray-rules](https://github.com/Chocolate4U/Iran-v2ray-rules)
 (GPLv3) and [bootmortis/iran-hosted-domains](https://github.com/bootmortis/iran-hosted-domains) (MIT).

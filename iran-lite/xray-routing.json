@@ -1,0 +1,24 @@
+[
+  {
+    "remarks": "Iran domains",
+    "outboundTag": "direct",
+    "domain": [
+      "ext:iran-lite-domains.dat:ir"
+    ],
+    "enabled": true
+  },
+  {
+    "remarks": "Iran and private IP ranges",
+    "outboundTag": "direct",
+    "ip": [
+      "ext:iran-lite-ips.dat:ir"
+    ],
+    "enabled": true
+  },
+  {
+    "remarks": "Other destinations",
+    "outboundTag": "proxy",
+    "port": "0-65535",
+    "enabled": true
+  }
+]
